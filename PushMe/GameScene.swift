@@ -8,38 +8,129 @@
 
 import SpriteKit
 
-class GameScene: SKScene {
-    override func didMoveToView(view: SKView) {
-        /* Setup your scene here */
-        let myLabel = SKLabelNode(fontNamed:"Chalkduster")
-        myLabel.text = "Hello, World!"
-        myLabel.fontSize = 45
-        myLabel.position = CGPoint(x:CGRectGetMidX(self.frame), y:CGRectGetMidY(self.frame))
-        
-        self.addChild(myLabel)
-    }
+class GameScene: SKScene, SKPhysicsContactDelegate{
     
-    override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
-       /* Called when a touch begins */
-        
-        for touch in touches {
-            let location = touch.locationInNode(self)
+    
+    var player:SKSpriteNode!
+    var player2:SKSpriteNode!
+    
+    var initalPlayerPosition:CGPoint!
+    
+    
+    override func touchesMoved(touches: Set<UITouch>, withEvent event: UIEvent?) {
+        if let touch = touches.first {
+            let maximumPossibleForce = touch.maximumPossibleForce
+            let force = touch.force
+            let normalizedForce = force/maximumPossibleForce
             
-            let sprite = SKSpriteNode(imageNamed:"Spaceship")
-            
-            sprite.xScale = 0.5
-            sprite.yScale = 0.5
-            sprite.position = location
-            
-            let action = SKAction.rotateByAngle(CGFloat(M_PI), duration:1)
-            
-            sprite.runAction(SKAction.repeatActionForever(action))
-            
-            self.addChild(sprite)
+            player.position.x = (self.size.width / 2) - normalizedForce * (self.size.width/2 - 25)
+            player2.position.x = (self.size.width / 2) + normalizedForce * (self.size.width/2 - 25)
         }
     }
-   
-    override func update(currentTime: CFTimeInterval) {
-        /* Called before each frame is rendered */
+    
+    override func touchesEnded(touches: Set<UITouch>, withEvent event: UIEvent?) {
+        resetPlayerPosition()
     }
+    
+    func resetPlayerPosition() {
+        player.position = initalPlayerPosition
+        player2.position = initalPlayerPosition
+    }
+    
+    
+    
+    override func didMoveToView(view: SKView) {
+        self.physicsWorld.gravity = CGVectorMake(0, 0)
+        physicsWorld.contactDelegate = self
+        addPlayer()
+        addRow(RowType.twoS)
+        
+    }
+    
+    func addRandomRow () {
+        let randomNumber = Int(arc4random_uniform(6))
+        
+        switch randomNumber {
+        case 0:
+            addRow(RowType(rawValue: 0)!)
+             break
+        case 1:
+            addRow(RowType(rawValue: 1)!)
+            break
+        case 2:
+            addRow(RowType(rawValue: 2)!)
+            break
+        case 3:
+            addRow(RowType(rawValue: 3)!)
+            break
+        case 4:
+            addRow(RowType(rawValue: 4)!)
+            break
+        case 5:
+            addRow(RowType(rawValue: 5)!)
+            break
+        default:
+            break
+        }
+    }
+    
+    var lastUpdateTimeInterval = NSTimeInterval()
+    var lastYieldTimeInterval = NSTimeInterval()
+    
+    
+    func updateWithTimeSinceLastUpdate (timeSinceLastUpdate:CFTimeInterval) {
+        lastYieldTimeInterval += timeSinceLastUpdate
+        if lastYieldTimeInterval > 0.6 {
+            lastYieldTimeInterval = 0
+            addRandomRow()
+        }
+    }
+    
+    
+    override func update(currentTime: CFTimeInterval) {
+        
+        var timeSinceLastUpdate = currentTime - lastUpdateTimeInterval
+        lastUpdateTimeInterval = currentTime
+        
+        if timeSinceLastUpdate > 1 {
+            timeSinceLastUpdate = 1/60
+            lastUpdateTimeInterval = currentTime
+        }
+        
+        updateWithTimeSinceLastUpdate(timeSinceLastUpdate)
+        
+    }
+    
+    func didBeginContact(contact: SKPhysicsContact) {
+        if contact.bodyA.node?.name == "PLAYER" {
+            print("GAME OVER")
+            showGameOver()
+        }
+    }
+    
+    func showGameOver () {
+                
+        let transition = SKTransition.fadeWithDuration(0.5)
+        let gameOverScene = GameOverScene(size: self.size)
+        self.view?.presentScene(gameOverScene, transition: transition)
+    }
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
 }

@@ -14,6 +14,9 @@
 		86E723451D146D1000202A21 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 86E723431D146D1000202A21 /* Main.storyboard */; };
 		86E723471D146D1000202A21 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 86E723461D146D1000202A21 /* Assets.xcassets */; };
 		86E7234A1D146D1000202A21 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 86E723481D146D1000202A21 /* LaunchScreen.storyboard */; };
+		86E723521D146E8A00202A21 /* GameElements.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86E723511D146E8A00202A21 /* GameElements.swift */; };
+		86E723541D147CC800202A21 /* GameOverScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86E723531D147CC800202A21 /* GameOverScene.swift */; };
+		86E723561D147E5100202A21 /* bgMusic.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 86E723551D147E5100202A21 /* bgMusic.mp3 */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -26,6 +29,9 @@
 		86E723461D146D1000202A21 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		86E723491D146D1000202A21 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		86E7234B1D146D1000202A21 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		86E723511D146E8A00202A21 /* GameElements.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GameElements.swift; sourceTree = "<group>"; };
+		86E723531D147CC800202A21 /* GameOverScene.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GameOverScene.swift; sourceTree = "<group>"; };
+		86E723551D147E5100202A21 /* bgMusic.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = bgMusic.mp3; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -58,9 +64,12 @@
 		86E7233A1D146D1000202A21 /* PushMe */ = {
 			isa = PBXGroup;
 			children = (
+				86E723551D147E5100202A21 /* bgMusic.mp3 */,
 				86E7233B1D146D1000202A21 /* AppDelegate.swift */,
 				86E7233D1D146D1000202A21 /* GameScene.sks */,
 				86E7233F1D146D1000202A21 /* GameScene.swift */,
+				86E723511D146E8A00202A21 /* GameElements.swift */,
+				86E723531D147CC800202A21 /* GameOverScene.swift */,
 				86E723411D146D1000202A21 /* GameViewController.swift */,
 				86E723431D146D1000202A21 /* Main.storyboard */,
 				86E723461D146D1000202A21 /* Assets.xcassets */,
@@ -102,6 +111,7 @@
 				TargetAttributes = {
 					86E723371D146D1000202A21 = {
 						CreatedOnToolsVersion = 7.3.1;
+						DevelopmentTeam = SBWZW765RG;
 					};
 				};
 			};
@@ -130,6 +140,7 @@
 			files = (
 				86E7233E1D146D1000202A21 /* GameScene.sks in Resources */,
 				86E7234A1D146D1000202A21 /* LaunchScreen.storyboard in Resources */,
+				86E723561D147E5100202A21 /* bgMusic.mp3 in Resources */,
 				86E723471D146D1000202A21 /* Assets.xcassets in Resources */,
 				86E723451D146D1000202A21 /* Main.storyboard in Resources */,
 			);
@@ -142,6 +153,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				86E723541D147CC800202A21 /* GameOverScene.swift in Sources */,
+				86E723521D146E8A00202A21 /* GameElements.swift in Sources */,
 				86E723401D146D1000202A21 /* GameScene.swift in Sources */,
 				86E723421D146D1000202A21 /* GameViewController.swift in Sources */,
 				86E7233C1D146D1000202A21 /* AppDelegate.swift in Sources */,
@@ -257,10 +270,13 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				INFOPLIST_FILE = PushMe/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.training.PushMe;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 			};
 			name = Debug;
 		};
@@ -268,10 +284,13 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				INFOPLIST_FILE = PushMe/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.training.PushMe;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 			};
 			name = Release;
 		};

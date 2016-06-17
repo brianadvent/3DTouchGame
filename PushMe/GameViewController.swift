@@ -8,13 +8,28 @@
 
 import UIKit
 import SpriteKit
+import AVFoundation
 
 class GameViewController: UIViewController {
 
+    var backgroundMusicPlayer = AVAudioPlayer()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
         if let scene = GameScene(fileNamed:"GameScene") {
+            
+            let bgMusicURL = NSBundle.mainBundle().URLForResource("bgMusic", withExtension: "mp3")
+            do {
+                try backgroundMusicPlayer = AVAudioPlayer(contentsOfURL: bgMusicURL!)
+            }catch {
+                print("cant play music")
+            }
+            
+            backgroundMusicPlayer.numberOfLoops = -1
+            backgroundMusicPlayer.prepareToPlay()
+            backgroundMusicPlayer.play()
+            
             // Configure the view.
             let skView = self.view as! SKView
             skView.showsFPS = true
