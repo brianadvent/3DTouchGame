@@ -49,28 +49,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate{
     func addRandomRow () {
         let randomNumber = Int(arc4random_uniform(6))
         
-        switch randomNumber {
-        case 0:
-            addRow(RowType(rawValue: 0)!)
-             break
-        case 1:
-            addRow(RowType(rawValue: 1)!)
-            break
-        case 2:
-            addRow(RowType(rawValue: 2)!)
-            break
-        case 3:
-            addRow(RowType(rawValue: 3)!)
-            break
-        case 4:
-            addRow(RowType(rawValue: 4)!)
-            break
-        case 5:
-            addRow(RowType(rawValue: 5)!)
-            break
-        default:
-            break
-        }
+        addRow(RowType(rawValue: randomNumber)!)
     }
     
     var lastUpdateTimeInterval = NSTimeInterval()
